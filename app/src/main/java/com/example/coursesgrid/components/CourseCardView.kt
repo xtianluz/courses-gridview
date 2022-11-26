@@ -15,56 +15,54 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coursesgrid.R
+import com.example.coursesgrid.model.CoursesData
 import com.example.coursesgrid.ui.theme.CoursesGridTheme
 
 @Composable
-fun CourseCard(imagePainter: Painter,
-               contentDescription: String,
-               courseTitle: String,
-               numberOfCoursesText: String){
+fun CourseCard(coursesProperties:CoursesData
+               ){
     Card(modifier = Modifier.padding(8.dp), elevation = 6.dp) {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(painter = imagePainter, contentDescription = contentDescription, contentScale = ContentScale.FillHeight, modifier = Modifier.height(60.dp))
-            Column(Modifier.padding(start = 6.dp, end = 6.dp)) {
-                Text(text = courseTitle, fontSize = 12.sp)
+            Image(
+                painter = painterResource(coursesProperties.imageResourceId),
+                contentDescription = null,
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier
+                    .height(68.dp)
+                    .width(68.dp)
+            )
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+            ) {
+                Text(text = stringResource(coursesProperties.courseTitle), fontSize = 12.sp)
                 Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier.padding(top = 6.dp)
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         Icons.Filled.Home, contentDescription = null,
                         modifier = Modifier
-                            .size(16.dp)
+                            .size(18.dp)
+                            .padding(top = 8.dp)
                     )
                     Text(
-                        text = numberOfCoursesText, fontSize = 10.sp,
+                        text = coursesProperties.courseCount.toString(), fontSize = 10.sp,
                         modifier = Modifier
-                            .padding(start = 6.dp)
+                            .padding(start = 8.dp, top = 8.dp)
                     )
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = false, showSystemUi = false)
-@Composable
-fun DefaultPreview() {
-    CoursesGridTheme {
-        CourseCard(
-            imagePainter = painterResource(R.drawable.architecture),
-            contentDescription = "Architecture Course",
-            courseTitle = "Architecture" ,
-            numberOfCoursesText = "363"
-        )
     }
 }
