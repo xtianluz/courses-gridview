@@ -27,27 +27,35 @@ fun CourseCard(imagePainter: Painter,
                contentDescription: String,
                courseTitle: String,
                numberOfCoursesText: String){
-    Row(horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Card(modifier = Modifier.padding(8.dp), elevation = 6.dp) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(painter = imagePainter, contentDescription = contentDescription)
-                Column(Modifier.padding(start = 6.dp, end = 6.dp)) {
-                    Text(text = courseTitle, fontSize = 12.sp)
-                    Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.padding(top = 6.dp)) {
-                        Icon(iconPainter, contentDescription = null,
-                                modifier = Modifier
-                                    .size(16.dp)
-                            )
-                        Text(text = numberOfCoursesText, fontSize = 10.sp,
+            Column(Modifier.padding(start = 6.dp, end = 6.dp)) {
+                Text(text = courseTitle, fontSize = 12.sp)
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.padding(top = 6.dp)
+                ) {
+                    Icon(
+                        iconPainter, contentDescription = null,
+                        modifier = Modifier
+                            .size(16.dp)
+                    )
+                    Text(
+                        text = numberOfCoursesText, fontSize = 10.sp,
                         modifier = Modifier
                             .padding(start = 6.dp)
-                        )
-                    }
+                    )
                 }
+            }
+        }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = false, showSystemUi = false)
 @Composable
 fun DefaultPreview() {
     CoursesGridTheme {
